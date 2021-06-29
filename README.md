@@ -5,8 +5,15 @@
  Fácil rápido e expansível, com auto aprendizado com treinos.
 
  Técnologia:
-    Reconhecimento de fala.
+    Reconhecimento de fala(Google).
     Síntese de fala.
     Inteligencia Artificial.
+
+Instalação:
+  python 3.9  
+    Comandos:
+        pip install SpeechRecognition
+        pip install pipwin
+        pipwin install pyaudio
 
 
