@@ -1,7 +1,13 @@
+from math import trunc
 from neuralintents import GenericAssistant
 import speech_recognition
 import pyttsx3 as tts
 import sys
+import os
+import spotipy 
+from spotipy.oauth2 import SpotifyOAuth
+
+
 
 # reconhecedor de fala
 sr = speech_recognition.Recognizer()
@@ -12,6 +18,14 @@ speaker.setProperty('rate', 150)
 
 
 todo_list = ['ir ao shopping', 'Limpar o quarto', 'Treinar malia']
+
+
+os.environ['SPOTIPY_CLIENT_ID'] = '7daa8d1f378d481d98e1dfcd61e34cd4'
+os.environ['SPOTIPY_CLIENT_SECRET'] = '675990aa8d454265abad49133b75cc92'
+os.environ['SPOTIPY_REDIRECT_URI'] = 'https://example.com/callback'
+
+scope = "user-read-playback-state,user-modify-playback-state"
+sp = spotipy.Spotify(client_credentials_manager=SpotifyOAuth(scope=scope))
 
 #funções
 
@@ -99,6 +113,47 @@ def quit():
     speaker.say("Certo, até mais tarde!")
     speaker.runAndWait()
     sys.exit(0)
+
+def playspotify():
+    global sp
+    global sr
+    speaker.say("Que música você quer ouvir?")
+    speaker.runAndWait()
+
+    done = False
+
+    while not done:
+        try:
+            with speech_recognition.Microphone() as mic:
+
+                sr.adjust_for_ambient_noise(mic, duration=0.2)
+                audio = sr.listen(mic)
+
+                musica = sr.recognize_google(audio, language='pt-BR')
+                musica = musica.lower()#.replace('tocar no spotify','').strip()
+
+                results = sp.search(musica,1,0,"track")
+
+                #nome_artista = results['tracks']['items'][0]['artists'][0]['name']
+                nome_musica = results['tracks']['items'][0]['name']
+                track_uri = results['tracks']['items'][0]['uri']
+
+                speaker.say(f'Tocando {nome_musica} no spotify')
+                speaker.runAndWait()
+
+            try:
+                sp.start_playback(uris=[track_uri])
+            except:
+                speaker.say("Ouve algum problema ao tentar reproduzir a música")
+                speaker.say("é necessario ser premium, para que eu possa controlar seu spotify")
+
+
+        except speech_recognition.UnknownValueError:
+            sr = speech_recognition.Recognizer()
+
+            speaker.say("Eu não consegui te entender! Tente novamente!")
+            speaker.runAndWait()
+            done = True
                 
 
 
@@ -109,6 +164,7 @@ mappings = {
     "crir_nota": create_note,
     "add_todo": add_todo,
     "show_todos": show_todos,
+    "playspotify": playspotify,
     "despedida": exit
 }
 
@@ -121,7 +177,6 @@ assistant.save_model()
 
 assistant.load_model()
 
-
 #main
 
 while True:
@@ -133,7 +188,11 @@ while True:
             message = sr.recognize_google(audio, language='pt-BR')
             message = message.lower()
 
+            print(f"Reconhecido: {message}")
+
         assistant.request(message)
+       
+        
     except speech_recognition.UnknownValueError:
         sr = speech_recognition.Recognizer()
 

@@ -23,6 +23,10 @@
     {"tag": "show_todos",
         "patterns": ["Mostre minha lista de tarefas", "quais são minha tarefas", "quais tarefas estão na minha lista", "Oque tenho que fazer hoje?"],
         "responses": [""]
+    },
+    {"tag": "playspotify",
+        "patterns": ["Gostaria de ouvir musica no spotify", "quero ouvir musica", "escutar musica", "ouvir musica no spotify"],
+        "responses": [""]
     }
 ]
 }
