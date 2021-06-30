@@ -6,9 +6,10 @@ import sys
 # reconhecedor de fala
 sr = speech_recognition.Recognizer()
 
-
+#TTS
 speaker = tts.init()
 speaker.setProperty('rate', 150)
+
 
 todo_list = ['ir ao shopping', 'Limpar o quarto', 'Treinar malia']
 
@@ -38,7 +39,7 @@ def create_note():
                 sr.adjust_for_ambient_noise(mic, duration=0.2)
                 audio = sr.listen(mic)
 
-                filename = sr.recognize_google(audio)
+                filename = sr.recognize_google(audio, language='pt-BR')
                 filename = filename.lower()
 
             with open(f"{filename}.txt", 'w') as f:
@@ -69,7 +70,7 @@ def add_todo():
                 sr.adjust_for_ambient_noise(mic, duration=0.2)
                 audio = sr.listen(mic)
 
-                item = sr.recognize_google(audio)
+                item = sr.recognize_google(audio, language='pt-BR')
                 item = item.lower()
 
                 todo_list.append(item)
@@ -101,6 +102,7 @@ def quit():
                 
 
 
+#tags + call func
 
 mappings = {
     "saudacao": hello,
@@ -110,12 +112,17 @@ mappings = {
     "despedida": exit
 }
 
+#train/intents
+
 assistant = GenericAssistant('intents.json', intent_methods=mappings)
 assistant.train_model()
 
 assistant.save_model()
 
 assistant.load_model()
+
+
+#main
 
 while True:
     try:
