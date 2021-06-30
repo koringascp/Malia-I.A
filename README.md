@@ -7,7 +7,7 @@
  Técnologia:
     Reconhecimento de fala(Google).
     Síntese de fala.
-    Inteligencia Artificial.
+    Inteligencia Artificial(Neuralintents, tensorflow).
 
 Instalação:
   python 3.9  
