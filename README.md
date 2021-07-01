@@ -7,7 +7,8 @@
  Técnologia:
     Reconhecimento de fala(Google).
     Síntese de fala.
-    Inteligencia Artificial.
+    Inteligencia Artificial(Neuralintents, tensorflow).
+    Wikipedia.
 
 Instalação:
   python 3.9  
@@ -17,5 +18,6 @@ Instalação:
         pipwin install pyaudio
         pip install pyttsx3
         pip install neuralintents
+        pip install wikipedia
 
 
