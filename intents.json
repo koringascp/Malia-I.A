@@ -27,6 +27,10 @@
     {"tag": "playspotify",
         "patterns": ["Gostaria de ouvir musica no spotify", "quero ouvir musica", "escutar musica", "ouvir musica no spotify"],
         "responses": [""]
+    },
+    {"tag": "wikipedia",
+        "patterns": ["Gostaria de pesquisar algo", "iniciar pesquisa", "quero pesquisar sobre um assunto", "pesquise para mim"],
+        "responses": [""]
     }
 ]
 }

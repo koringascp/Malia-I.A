@@ -142,6 +142,7 @@ def playspotify():
 
                 speaker.say(f'Tocando {musica} no spotify')
                 speaker.runAndWait()
+                done = True
 
             try:
                 sp.start_playback(uris=[track_uri])
@@ -156,8 +157,41 @@ def playspotify():
             speaker.say("Eu não consegui te entender! Tente novamente!")
             speaker.runAndWait()
             done = True
-                
 
+
+#wikipedia func
+
+def wikipedia1():
+    
+    global sr
+    speaker.say("Me fale o que voçê deseja pesquisar?")
+    speaker.runAndWait()
+
+    done = False
+
+    while not done:
+        try:
+            with speech_recognition.Microphone() as mic:
+
+                sr.adjust_for_ambient_noise(mic, duration=0.2)
+                audio = sr.listen(mic)
+
+                wikipedia1 = sr.recognize_google(audio, language='pt-BR')
+                wikipedia1 =  wikipedia1.lower()
+
+                speaker.say(f'Pesquisando sobre{wikipedia1} encontrei as seguintes informações.')
+                speaker.runAndWait()
+                done = True
+                wikipedia . set_lang ( "pt" )
+                info = wikipedia.summary(wikipedia1, sentences=2)
+
+                speaker.say(info)
+                speaker.runAndWait()
+                
+        except:        
+            speaker.say("Erro, Falha na conexão tente novamente!")
+            speaker.runAndWait()
+            done = True
 
 #tags + call func
 
@@ -167,6 +201,7 @@ mappings = {
     "add_todo": add_todo,
     "show_todos": show_todos,
     "playspotify": playspotify,
+    "wikipedia": wikipedia1,
     "despedida": exit
 }
 
