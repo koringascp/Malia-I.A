@@ -6,6 +6,8 @@ import sys
 import os
 import spotipy 
 from spotipy.oauth2 import SpotifyOAuth
+import datetime
+import wikipedia
 
 
 
@@ -20,8 +22,8 @@ speaker.setProperty('rate', 150)
 todo_list = ['ir ao shopping', 'Limpar o quarto', 'Treinar malia']
 
 
-os.environ['SPOTIPY_CLIENT_ID'] = '7daa8d1f378d481d98e1dfcd61e34cd4'
-os.environ['SPOTIPY_CLIENT_SECRET'] = '675990aa8d454265abad49133b75cc92'
+os.environ['SPOTIPY_CLIENT_ID'] = '27a37152305e4434ab81e1090450b57e'
+os.environ['SPOTIPY_CLIENT_SECRET'] = '4395497727e2489bb0c4a49efe4b449b'
 os.environ['SPOTIPY_REDIRECT_URI'] = 'https://example.com/callback'
 
 scope = "user-read-playback-state,user-modify-playback-state"
@@ -135,10 +137,10 @@ def playspotify():
                 results = sp.search(musica,1,0,"track")
 
                 #nome_artista = results['tracks']['items'][0]['artists'][0]['name']
-                nome_musica = results['tracks']['items'][0]['name']
+                #nome_musica = results['tracks']['items'][0]['name']
                 track_uri = results['tracks']['items'][0]['uri']
 
-                speaker.say(f'Tocando {nome_musica} no spotify')
+                speaker.say(f'Tocando {musica} no spotify')
                 speaker.runAndWait()
 
             try:
