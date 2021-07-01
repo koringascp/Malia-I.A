@@ -182,7 +182,7 @@ def wikipedia1():
                 speaker.say(f'Pesquisando sobre{wikipedia1} encontrei as seguintes informações.')
                 speaker.runAndWait()
                 done = True
-                wikipedia . set_lang ( "pt" )
+                wikipedia.set_lang( "pt" )
                 info = wikipedia.summary(wikipedia1, sentences=2)
 
                 speaker.say(info)
