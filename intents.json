@@ -6,11 +6,11 @@
     },
     {"tag": "despedida",
      "patterns": ["Tchau", "Até logo", "Até amanha", "Foi um prazer", "Adeus","Até mais", "Até breve", "Até logo", "Até amanha"],
-     "responses": ["Até logo, obrigada por conversar comigo.", "Tenha um lindo dia.", "Tchau! Volte novamente em breve.", "Tchau", "Até breve"]
+     "responses": [""]
     },
     {"tag": "agradecimento",
      "patterns": ["Obrigada", "Muito obrigada", "Obrigada pela atenção", "Grata pela ajuda", "De nada", "Obrigado", "Muito obrigado", "Obrigado pela atenção", "Grato pela ajuda", "Obrigada pela atencao", "Obrigado pela atencao","Ok", "Valeu", "Agradecido"],
-     "responses": ["Feliz por ajudar!", "Estou a disposição", "Foi um prazer.", "De nada!"]
+     "responses": [""]
     },
     {"tag": "crir_nota",
      "patterns": ["Porfavor crie uma nova nota", "adicionar nova nota", "nova nota", "Ei quero criar uma nova nota"],

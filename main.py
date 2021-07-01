@@ -18,19 +18,19 @@ sr = speech_recognition.Recognizer()
 speaker = tts.init()
 speaker.setProperty('rate', 150)
 
-
+#lista de tarefas array
 todo_list = ['ir ao shopping', 'Limpar o quarto', 'Treinar malia']
 
-
+#api scopes spotify
 os.environ['SPOTIPY_CLIENT_ID'] = '27a37152305e4434ab81e1090450b57e'
 os.environ['SPOTIPY_CLIENT_SECRET'] = '4395497727e2489bb0c4a49efe4b449b'
 os.environ['SPOTIPY_REDIRECT_URI'] = 'https://example.com/callback'
-
 scope = "user-read-playback-state,user-modify-playback-state"
 sp = spotipy.Spotify(client_credentials_manager=SpotifyOAuth(scope=scope))
 
 #funções
 
+#criar notas func
 def create_note():
     global sr
 
@@ -71,7 +71,7 @@ def create_note():
             speaker.say("Eu não consegui te entender! Tente novamente!")
             speaker.runAndWait()
 
-
+#adicionar lista de tarefas func
 def add_todo():
     global sr
     speaker.say("Oque você quer adicionar?")
@@ -101,21 +101,25 @@ def add_todo():
             speaker.say("Eu não consegui te entender! Tente novamente!")
             speaker.runAndWait()
 
+#mostrar lista de tarefas func
 def show_todos():
     speaker.say("Você tem as seguintes tarefas em sua lista.")
     for item in todo_list:
         speaker.say(item)
     speaker.runAndWait()
 
+#olá func
 def hello():
     speaker.say("Olá, em que posso ajudar?")
     speaker.runAndWait()
 
+#sair func
 def quit():
     speaker.say("Certo, até mais tarde!")
     speaker.runAndWait()
     sys.exit(0)
 
+#tocar musica spotify func
 def playspotify():
     global sp
     global sr
@@ -209,9 +213,7 @@ mappings = {
 
 assistant = GenericAssistant('intents.json', intent_methods=mappings)
 assistant.train_model()
-
 assistant.save_model()
-
 assistant.load_model()
 
 #main
