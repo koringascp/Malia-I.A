@@ -35,6 +35,18 @@
     {"tag": "meuloc",
         "patterns": ["qual é meu endereço","qual é minha localização"],
         "responses": [""]
+    },
+    {"tag": "bateria",
+        "patterns": ["em quantos porcentos esta minha bateria","qual nivel de bateria", "quanto de bateria tenho", "em quanto está a bateria"],
+        "responses": [""]
+    },
+    {"tag": "cpu",
+        "patterns": ["qual o uso do processador","em quanto esta o uso do processador"],
+        "responses": [""]
+    },
+    {"tag": "tempcpu",
+        "patterns": ["qual a temperatura da cpu","qual é a temperatura da cpu", "qual a temperatura do processador","qual é a temperatura do processador"],
+        "responses": [""]
     }
 ]
 }

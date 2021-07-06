@@ -19,5 +19,6 @@ Instalação:
         pip install pyttsx3
         pip install neuralintents
         pip install wikipedia
+        pip install psutil
 
 

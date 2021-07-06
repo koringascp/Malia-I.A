@@ -9,6 +9,7 @@ from spotipy.oauth2 import SpotifyOAuth
 import datetime
 import wikipedia
 import requests
+import psutil
 
 
 
@@ -164,6 +165,7 @@ def playspotify():
             speaker.runAndWait()
             done = True
 
+#região
 def mmeuloc():
     try:
         ip_add = requests.get('https://api.ipify.org').text
@@ -181,6 +183,49 @@ def mmeuloc():
         speaker.say("Eu não conseguir me conectar ao servidor de regiões, porfavor tente novamente!")
         speaker.runAndWait()
             
+#% da bateria
+def bateria():
+    try:
+        bateria = psutil.sensors_battery()
+        carga = bateria.percent
+        bp = str(bateria.percent)
+        bpint = "{:.0f}".format(float(bp))
+        speaker.say("A bateria está em:" +bpint +'%')
+        if carga <= 20:
+            speaker.say('Ela está em nivel crítico')
+            speaker.say('Por favor, coloque o carregador')
+            speaker.runAndWait()
+        elif carga == 100:
+            speaker.say('Ela está totalmente carregada')
+            speaker.say('Retire o carregador da tomada')
+            speaker.runAndWait()
+    except:
+        speaker.say('Não foi possível checar o nível da bateria!')
+        speaker.runAndWait()
+#uso da cpu
+def cpu ():
+    try:
+        usocpuinfo = str(psutil.cpu_percent())
+        usodacpu  = "{:.0f}".format(float(usocpuinfo))
+        speaker.say('Verificando carga do sistema')
+        speaker.say('O uso do processador está em ' +usodacpu +'%')
+        speaker.runAndWait()
+    except:
+        speaker.say('Não foi possível checar o uso do processador!')
+        speaker.runAndWait()
+#temperatura da cpu
+def tempcpu():
+    try:
+        tempcpu = psutil.sensors_temperatures()
+        cputemp = tempcpu['coretemp'][0]
+        temperaturacpu = cputemp.current
+        cputempint = "{:.0f}".format(float(temperaturacpu))
+        speaker.say('A temperatura da CPU está em ' +cputempint +'°')
+        speaker.runAndWait()
+    except:
+        speaker.say('Não foi possível checar a temperatura do processador!')
+        speaker.say('Atenção está função não está disponível para sistemas operacionas windows!')
+        speaker.runAndWait()
 
 
 #wikipedia func
@@ -227,6 +272,9 @@ mappings = {
     "playspotify": playspotify,
     "wikipedia": wikipedia1,
     "meuloc": mmeuloc,
+    "bateria": bateria,
+    "cpu": cpu,
+    "tempcpu": tempcpu,
     "despedida": exit
 }
 
