@@ -8,6 +8,8 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import datetime
 import wikipedia
+import requests
+
 
 
 
@@ -162,6 +164,24 @@ def playspotify():
             speaker.runAndWait()
             done = True
 
+def mmeuloc():
+    try:
+        ip_add = requests.get('https://api.ipify.org').text
+        url = 'https://get.geojs.io/v1/ip/geo/' + ip_add + '.json'
+        geo_requests = requests.get(url)
+        geo_data = geo_requests.json()
+        cidade = geo_data['city']
+        estado = geo_data['region']
+        country = geo_data['country']
+
+        speaker.say(f"A sua localidade segundo seu indereço de ip é: cidade {cidade} do estado de {estado} país {country}")
+        speaker.runAndWait()
+
+    except:
+        speaker.say("Eu não conseguir me conectar ao servidor de regiões, porfavor tente novamente!")
+        speaker.runAndWait()
+            
+
 
 #wikipedia func
 
@@ -206,6 +226,7 @@ mappings = {
     "show_todos": show_todos,
     "playspotify": playspotify,
     "wikipedia": wikipedia1,
+    "meuloc": mmeuloc,
     "despedida": exit
 }
 

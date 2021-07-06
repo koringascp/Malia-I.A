@@ -31,6 +31,10 @@
     {"tag": "wikipedia",
         "patterns": ["Gostaria de pesquisar algo", "iniciar pesquisa", "quero pesquisar sobre um assunto", "pesquise para mim"],
         "responses": [""]
+    },
+    {"tag": "meuloc",
+        "patterns": ["qual é meu endereço","qual é minha localização"],
+        "responses": [""]
     }
 ]
 }
