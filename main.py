@@ -11,7 +11,7 @@ import wikipedia
 
 
 
-# reconhecedor de fala
+# reconhecedor de fala https://www.weatherapi.com/api-explorer.aspx#forecast
 sr = speech_recognition.Recognizer()
 
 #TTS
@@ -212,9 +212,20 @@ mappings = {
 #train/intents
 
 assistant = GenericAssistant('intents.json', intent_methods=mappings)
+speaker.say("Iniciando treinamento do modelo.")
+speaker.runAndWait()
+
 assistant.train_model()
+speaker.say("Salvando modelo treinado.")
+speaker.runAndWait()
+
 assistant.save_model()
+speaker.say("Aguarde um pouco, Carregando modelo treinado.")
+speaker.runAndWait()
+
 assistant.load_model()
+speaker.say("Pronto estou aguardando seus comandos.")
+speaker.runAndWait()
 
 #main
 
@@ -224,6 +235,7 @@ while True:
             sr.adjust_for_ambient_noise(mic, duration=0.2)
             audio = sr.listen(mic)
 
+            
             message = sr.recognize_google(audio, language='pt-BR')
             message = message.lower()
 
