@@ -22,8 +22,8 @@ speaker.setProperty('rate', 150)
 todo_list = ['ir ao shopping', 'Limpar o quarto', 'Treinar malia']
 
 #api scopes spotify
-os.environ['SPOTIPY_CLIENT_ID'] = '27a37152305e4434ab81e1090450b57e'
-os.environ['SPOTIPY_CLIENT_SECRET'] = '4395497727e2489bb0c4a49efe4b449b'
+os.environ['SPOTIPY_CLIENT_ID'] = ''
+os.environ['SPOTIPY_CLIENT_SECRET'] = ''
 os.environ['SPOTIPY_REDIRECT_URI'] = 'https://example.com/callback'
 scope = "user-read-playback-state,user-modify-playback-state"
 sp = spotipy.Spotify(client_credentials_manager=SpotifyOAuth(scope=scope))
