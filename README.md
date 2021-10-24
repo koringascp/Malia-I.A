@@ -14,10 +14,11 @@ Instalação:
   python 3.9  
     Comandos:
         pip install SpeechRecognition
+        pip install wheel
         pip install pipwin
         pipwin install pyaudio
         pip install pyttsx3
-        pip install neuralintents
+        pip3 install neuralintents
         pip install wikipedia
         pip install psutil
 
