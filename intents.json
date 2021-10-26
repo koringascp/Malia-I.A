@@ -47,6 +47,10 @@
     {"tag": "tempcpu",
         "patterns": ["qual a temperatura da cpu","qual é a temperatura da cpu", "qual a temperatura do processador","qual é a temperatura do processador"],
         "responses": [""]
+    },
+    {"tag": "clima",
+        "patterns": ["Previsão do tempo","Como está o tempo", "Qual a previsão do tempo"],
+        "responses": [""]
     }
 ]
 }

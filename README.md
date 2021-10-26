@@ -21,5 +21,9 @@ Instalação:
         pip3 install neuralintents
         pip install wikipedia
         pip install psutil
+        pip install spotipy
+
+    Uso:
+      python main.py
 
 

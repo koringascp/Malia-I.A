@@ -14,7 +14,6 @@ import psutil
 
 
 
-# reconhecedor de fala https://www.weatherapi.com/api-explorer.aspx#forecast
 sr = speech_recognition.Recognizer()
 
 #TTS
@@ -27,9 +26,13 @@ todo_list = ['ir ao shopping', 'Limpar o quarto', 'Treinar malia']
 #api scopes spotify
 os.environ['SPOTIPY_CLIENT_ID'] = ''
 os.environ['SPOTIPY_CLIENT_SECRET'] = ''
-os.environ['SPOTIPY_REDIRECT_URI'] = 'https://example.com/callback'
+os.environ['SPOTIPY_REDIRECT_URI'] = 'https://example.com/callback/'
 scope = "user-read-playback-state,user-modify-playback-state"
 sp = spotipy.Spotify(client_credentials_manager=SpotifyOAuth(scope=scope))
+
+#api climas
+weather_api_key=""
+weather_base_url="https://api.openweathermap.org/data/2.5/weather?"
 
 #funções
 
@@ -227,6 +230,61 @@ def tempcpu():
         speaker.say('Atenção está função não está disponível para sistemas operacionas windows!')
         speaker.runAndWait()
 
+#clima
+
+def clima():
+    global sp
+    global sr
+    speaker.say("Para qual cidade?")
+    speaker.runAndWait()
+    done = False
+
+    
+    while not done:
+        try:
+            with speech_recognition.Microphone() as mic:
+
+                sr.adjust_for_ambient_noise(mic, duration=0.2)
+                audio = sr.listen(mic)
+
+                cidade = sr.recognize_google(audio, language='pt-BR')
+                complete_url=weather_base_url+"appid="+weather_api_key+"&q="+cidade+"&lang=pt_br&units=metric"
+                response = requests.get(complete_url)
+                x=response.json()
+                print(complete_url)
+                speaker.say(f'Analizando o clima para {cidade}')
+                speaker.runAndWait()
+                done = True
+
+                try:
+                 if x["cod"]!="404":
+                    y=x["main"]
+                    temperatura = y["temp"]
+                    temp_max = y["temp_max"]
+                    umidade = y["humidity"]
+                    z = x["weather"]
+                    descricao = z[0]["description"]
+
+                    speaker.say(f"O Clima para {cidade} é de {descricao}, com a temperatura de {temperatura}graus, podendo chegar a {temp_max}graus, com a umidade do ar em {umidade}%")
+                    speaker.runAndWait()
+                    
+
+                 else:
+                    speaker.say("Cidade não encotrada")
+                    speaker.runAndWait()
+                except:
+                    speaker.say("Ouve algum problema ao checar o clima, tente mais tarde!")
+                    speaker.runAndWait()
+
+
+        except speech_recognition.UnknownValueError:
+            sr = speech_recognition.Recognizer()
+
+            speaker.say("Eu não consegui te entender! Tente novamente!")
+            speaker.runAndWait()
+            done = True
+
+
 
 #wikipedia func
 
@@ -262,6 +320,9 @@ def wikipedia1():
             speaker.runAndWait()
             done = True
 
+
+
+
 #tags + call func
 
 mappings = {
@@ -275,6 +336,7 @@ mappings = {
     "bateria": bateria,
     "cpu": cpu,
     "tempcpu": tempcpu,
+    "clima": clima,
     "despedida": exit
 }
 
